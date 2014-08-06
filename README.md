@@ -1,3 +1,7 @@
+[![Build Status](https://travis-ci.org/hercules-team/augeasproviders_pam.svg?branch=master)](https://travis-ci.org/hercules-team/augeasproviders_pam)
+[![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_pam.svg)](https://coveralls.io/r/hercules-team/augeasproviders_pam)
+
+
 # pam: type/provider for PAM files for Puppet
 
 This module provides a new type/provider for Puppet to read and modify PAM
