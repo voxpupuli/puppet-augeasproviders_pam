@@ -1,8 +1,0 @@
-name    'herculesteam-augeasproviders_pam'
-version '1.0.0'
-source 'git://github.com/hercules-team/augeasproviders_pam'
-author 'Dominic Cleal, Raphael Pinson'
-license 'Apache 2.0'
-summary 'Augeas-based PAM type and provider for Puppet'
-description 'This module provides type/providers for PAM using the Augeas configuration API library.'
-project_page 'http://augeasproviders.com'
