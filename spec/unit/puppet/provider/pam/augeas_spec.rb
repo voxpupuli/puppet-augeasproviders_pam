@@ -28,8 +28,8 @@ describe provider_class do
       ))
 
       aug_open(target, "Pam.lns") do |aug|
-        aug.get("./1/module").should == "pam_test.so"
-        aug.get("./1/argument[1]").should == "test_me_out"
+        expect(aug.get("./1/module")).to eq("pam_test.so")
+        expect(aug.get("./1/argument[1]")).to eq("test_me_out")
       end
     end
 
@@ -46,8 +46,8 @@ describe provider_class do
       ))
 
       aug_open(target, "Pam.lns") do |aug|
-        aug.get("./1/module").should == "pam_test.so"
-        aug.match("./1/argument").size.should == 0
+        expect(aug.get("./1/module")).to eq("pam_test.so")
+        expect(aug.match("./1/argument").size).to eq(0)
       end
     end
 
@@ -76,7 +76,7 @@ describe provider_class do
       ))
 
       aug_open(target, "Pam.lns") do |aug|
-        aug.match("*[type='auth']").size.should == 2
+        expect(aug.match("*[type='auth']").size).to eq(2)
       end
     end
   end
@@ -98,37 +98,37 @@ describe provider_class do
         }
       }
 
-      inst.size.should == 21
-      inst[0].should == {:ensure     => :present,
+      expect(inst.size).to eq(21)
+      expect(inst[0]).to eq({:ensure     => :present,
                          :service    => :absent,
                          :type       => "auth",
                          :control    => "required",
                          :module     => "pam_env.so",
-                         :arguments  => [],}
-      inst[1].should == {:ensure     => :present,
+                         :arguments  => [],})
+      expect(inst[1]).to eq({:ensure     => :present,
                          :service    => :absent,
                          :type       => "auth",
                          :control    => "sufficient",
                          :module     => "pam_unix.so",
-                         :arguments  => ["nullok","try_first_pass"],}
-      inst[5].should == {:ensure     => :present,
+                         :arguments  => ["nullok","try_first_pass"],})
+      expect(inst[5]).to eq({:ensure     => :present,
                          :service    => :absent,
                          :type       => "account",
                          :control    => "required",
                          :module     => "pam_unix.so",
-                         :arguments  => ["broken_shadow"],}
-      inst[8].should == {:ensure     => :present,
+                         :arguments  => ["broken_shadow"],})
+      expect(inst[8]).to eq({:ensure     => :present,
                          :service    => :absent,
                          :type       => "account",
                          :control    => "[default=bad success=ok user_unknown=ignore]",
                          :module     => "pam_sss.so",
-                         :arguments  => [],}
-      inst[10].should == {:ensure    => :present,
+                         :arguments  => [],})
+      expect(inst[10]).to eq({:ensure    => :present,
                           :service    => :absent,
                           :type      => "password",
                           :control   => "requisite",
                           :module    => "pam_pwquality.so",
-                          :arguments => ["try_first_pass","retry=3","type="],}
+                          :arguments => ["try_first_pass","retry=3","type="],})
     end
 
     describe "when creating settings" do
@@ -147,8 +147,8 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.get("./5/module").should == "pam_test.so"
-          aug.get("./5/argument[1]").should == "test_me_out"
+          expect(aug.get("./5/module")).to eq("pam_test.so")
+          expect(aug.get("./5/argument[1]")).to eq("test_me_out")
         end
       end
     end
@@ -168,7 +168,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.match('./*[type="password" and module="pam_pwquality.so" and argument="retry=4"]').size.should == 1
+          expect(aug.match('./*[type="password" and module="pam_pwquality.so" and argument="retry=4"]').size).to eq(1)
         end
       end
 
@@ -186,7 +186,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.match('./*[type="password" and module="pam_pwquality.so" and argument="type="]').size.should == 0
+          expect(aug.match('./*[type="password" and module="pam_pwquality.so" and argument="type="]').size).to eq(0)
         end
       end
 
@@ -204,7 +204,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.get('./*[type="password" and module="pam_pwquality.so"]/control').should == "required"
+          expect(aug.get('./*[type="password" and module="pam_pwquality.so"]/control')).to eq("required")
         end
       end
 
@@ -223,9 +223,9 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.match('./*[type="password" and module="pam_pwquality.so"]/control').size.should == 2
-          aug.get('./*[type="password" and module="pam_pwquality.so"][1]/control').should == "requisite"
-          aug.get('./*[type="password" and module="pam_pwquality.so"][2]/control').should == "sufficient"
+          expect(aug.match('./*[type="password" and module="pam_pwquality.so"]/control').size).to eq(2)
+          expect(aug.get('./*[type="password" and module="pam_pwquality.so"][1]/control')).to eq("requisite")
+          expect(aug.get('./*[type="password" and module="pam_pwquality.so"][2]/control')).to eq("sufficient")
         end
       end
 
@@ -244,8 +244,8 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.match('./*[type="password" and module="pam_pwquality.so"]/control').size.should == 1
-          aug.get('./*[type="password" and module="pam_pwquality.so"]/control').should == "requisite"
+          expect(aug.match('./*[type="password" and module="pam_pwquality.so"]/control').size).to eq(1)
+          expect(aug.get('./*[type="password" and module="pam_pwquality.so"]/control')).to eq("requisite")
         end
       end
     end
@@ -265,7 +265,7 @@ describe provider_class do
         ))
 
         aug_open(target, "Pam.lns") do |aug|
-          aug.match('./*[type="password" and module="pam_pwquality.so"]').size.should == 0
+          expect(aug.match('./*[type="password" and module="pam_pwquality.so"]').size).to eq(0)
         end
       end
     end
@@ -288,9 +288,9 @@ describe provider_class do
         :ensure      => "present"
       ))
 
-      txn.any_failed?.should_not == nil
-      @logs.first.level.should == :err
-      @logs.first.message.include?(target).should == true
+      expect(txn.any_failed?).not_to eq(nil)
+      expect(@logs.first.level).to eq(:err)
+      expect(@logs.first.message.include?(target)).to eq(true)
     end
   end
 end
