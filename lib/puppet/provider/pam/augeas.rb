@@ -45,6 +45,37 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     end
   end
 
+  def self.position_path (position, type)
+    placement, identifier, value = position.split(/ /)
+    key = !!value
+    if PAM_POSITION_ALIASES[key].has_key? identifier
+      expr = PAM_POSITION_ALIASES[key][identifier]
+      expr = key ? expr % [type, value] : expr % [type]
+    else
+      # if the identifier is not in the mapping
+      # we assume that its an xpath and so
+      # join everything after the placement
+      expr = position.split(/ /)[1..-1].join(" ")
+    end
+    return expr, placement
+  end
+
+  def in_position?
+    unless resource[:position].nil?
+      path, before = self.class.position_path(resource[:position], resource[:type])
+
+      if before == 'before'
+        mpath = "#{resource_path}[following-sibling::#{path}]"
+      else
+        mpath = "#{resource_path}[preceding-sibling::#{path}]"
+      end
+
+      augopen do |aug|
+        !aug.match(mpath).empty?
+      end
+    end
+  end
+
   def self.instances
     augopen do |aug|
       resources = []
@@ -78,19 +109,10 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     type = resource[:type].to_s
     control = resource[:control]
     position = resource[:position]
-    placement, identifier, value = position.split(/ /)
-    key = !!value
-    if PAM_POSITION_ALIASES[key].has_key?(identifier)
-      expr = PAM_POSITION_ALIASES[key][identifier]
-      expr = key ? expr % [type, value] : expr % [type]
-    else
-      # if the identifier is not in the mapping
-      # we assume that its an xpath and so
-      # join everything after the placement
-      identifier = position.split(/ /)[1..-1].join(" ")
-      expr = identifier
+    unless position.nil?
+      expr, placement = self.position_path(position, type)
+      aug.insert("$target/#{expr}", path, placement == 'before')
     end
-    aug.insert("$target/#{expr}", path, placement == 'before')
     if resource[:optional] == :true
       aug.touch("#{entry_path}/optional")
     end

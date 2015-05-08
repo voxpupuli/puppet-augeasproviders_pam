@@ -131,6 +131,27 @@ describe provider_class do
                           :arguments => ["try_first_pass","retry=3","type="],})
     end
 
+    describe "when reodering settings" do
+      it "should change the order of an entry" do
+        apply!(Puppet::Type.type(:pam).new(
+          :title       => "Change the order of pam_unix.so",
+          :service     => "system-auth",
+          :type        => "auth",
+          :control     => "sufficient",
+          :module      => "pam_unix.so",
+          :arguments   => ["nullok","try_first_pass"],
+          :target      => target,
+          :provider    => "augeas",
+          :position    => "before module pam_env.so",
+          :ensure      => "positioned"
+        ))
+
+        aug_open(target, "Pam.lns") do |aug|
+          expect(aug.get("./1/module")).to eq("pam_unix.so")
+        end
+      end
+    end
+
     describe "when creating settings" do
       it "should create simple new entry" do
         apply!(Puppet::Type.type(:pam).new(
