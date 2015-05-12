@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.0
+
+- Support forced positioning (thanks to Michael Marod)
+- Do not version Gemfile.lock
+- Sudo needed on Travis
+- Update copyright
+- Improve README
+
 ## 2.0.3
 
 - Add requirements to metadata.json
