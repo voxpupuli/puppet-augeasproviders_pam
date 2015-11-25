@@ -67,12 +67,12 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
       # Would someone ever have an xpath for positioning that would include more than one [last()] ?
       # This section banks on there only ever being one [last()]...
       # We are unable to use [last()] inside the preceding-sibling block as it would always result in [1] so we do an
-      # extra call to augeas to find the last value of the matches and subtract 1 to match the proper lookup/emulate last()
+      # extra call to augeas to find the amount of matches and subtract 1 to match the proper lookup/emulate last()
       if path.include?('[last()]')
-        last_value = augopen.match(path)
-        return false if last_value.empty?
-        last_value = last_value[0].split('/').last.to_i - 1
-        path.sub!(/\[last\(\)\]/, "[#{last_value}]")
+        last_value = augopen.match(path.sub('[last()]','')).count
+        return true if last_value <= 1
+        last_value = last_value - 1
+        path.sub!('[last()]', "[#{last_value}]")
       end
       mpath = "#{resource_path}[preceding-sibling::#{path}]"
 
