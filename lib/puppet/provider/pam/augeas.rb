@@ -64,14 +64,23 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     unless resource[:position].nil?
       path, before = self.class.position_path(resource[:position], resource[:type])
 
-      if before == 'before'
-        mpath = "#{resource_path}[following-sibling::#{path}]"
-      else
-        mpath = "#{resource_path}[preceding-sibling::#{path}]"
+      # Would someone ever have an xpath for positioning that would include more than one [last()] ?
+      # This section banks on there only ever being one [last()]...
+      # We are unable to use [last()] inside the preceding-sibling block as it would always result in [1] so we do an
+      # extra call to augeas to find the last value of the matches and subtract 1 to match the proper lookup/emulate last()
+      if path.include?('[last()]')
+        last_value = augopen.match(path)
+        return false if last_value.empty?
+        last_value = last_value[0].split('/').last.to_i - 1
+        path.sub!(/\[last\(\)\]/, "[#{last_value}]")
       end
+      mpath = "#{resource_path}[preceding-sibling::#{path}]"
 
+      augmatch = false
       augopen do |aug|
-        !aug.match(mpath).empty?
+        augmatch = aug.match(mpath).empty?
+        # Since we use preceding-sibling for everything, we invert on the result if 'after' instead as it's more consistent
+        before == 'before' ? augmatch : !augmatch
       end
     end
   end
