@@ -78,23 +78,35 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
 
   def self.instances
     augopen do |aug|
+      lens_name = lens[/[^\.]+/]
+      # Load all default files
+      aug.transform(
+          :lens => lens,
+          :name => lens_name,
+          :incl => ['/etc/pam.conf', '/etc/pam.d/*'],
+          :excl => []
+      )
+      aug.load
       resources = []
-      aug.match("$target/*[label()!='#comment']").each do |spath|
+      aug.match("/files/etc/pam.d/*//*[label()!='#comment']").each do |spath|
         optional = aug.match("#{spath}/optional").empty?.to_s.to_sym
         type = aug.get("#{spath}/type")
         control = aug.get("#{spath}/control")
         mod = aug.get("#{spath}/module")
         arguments = aug.match("#{spath}/argument").map { |p| aug.get(p) }
-        entry = {:ensure    => :present,
-                 :optional  => optional,
-                 :type      => type,
-                 :control   => control,
-                 :module    => mod,
-                 :arguments => arguments}
-        if target == '/etc/pam.conf'
-          entry[:service] = aug.get("#{spath}/service")
+        if mod
+          entry = {:name      => "Pam #{mod}/#{type}",
+                   :ensure    => :present,
+                   :optional  => optional,
+                   :type      => type,
+                   :control   => control,
+                   :module    => mod,
+                   :arguments => arguments}
+          if target == '/etc/pam.conf'
+            entry[:service] = aug.get("#{spath}/service")
+          end
+          resources << new(entry)
         end
-        resources << new(entry)
       end
       resources
     end
