@@ -3,6 +3,7 @@
 # Copyright (c) 2012 Greg Swift
 # Licensed under the Apache License, Version 2.0
 
+raise("Missing augeasproviders_core dependency") if Puppet::Type.type(:augeasprovider).nil?
 Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeasprovider).provider(:default)) do
   desc "Uses Augeas API to update an pam parameter"
 
