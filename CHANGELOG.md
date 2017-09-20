@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+- Upped supported Puppet versions to include Puppet 5 
+
 ## 2.1.0
 
 - Support forced positioning (thanks to Michael Marod)
