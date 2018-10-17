@@ -76,6 +76,10 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     end
   end
 
+  def self.instances_targets
+    ['/etc/pam.conf', '/etc/pam.d/*']
+  end
+
   def self.instances
     augopen do |aug|
       lens_name = lens[/[^\.]+/]
@@ -83,12 +87,13 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
       aug.transform(
           :lens => lens,
           :name => lens_name,
-          :incl => ['/etc/pam.conf', '/etc/pam.d/*'],
+          :incl => instances_targets,
           :excl => []
       )
       aug.load
       resources = []
-      aug.match("/files/etc/pam.d/*//*[label()!='#comment']").each do |spath|
+      instances_target_paths = [instances_targets].flatten.map { |t| "/files"+t }.join("|")
+      aug.match("(#{instances_target_paths})//*[label()!='#comment']").each do |spath|
         optional = aug.match("#{spath}/optional").empty?.to_s.to_sym
         type = aug.get("#{spath}/type")
         control = aug.get("#{spath}/control")
