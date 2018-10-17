@@ -46,7 +46,7 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     end
   end
 
-  def self.position_path (position, type)
+  def self.position_path(position, type)
     placement, identifier, value = position.split(/ /)
     key = !!value
     if PAM_POSITION_ALIASES[key].has_key? identifier
@@ -77,25 +77,45 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     end
   end
 
+  def self.instances_targets
+    ['/etc/pam.conf', '/etc/pam.d/*']
+  end
+
   def self.instances
     augopen do |aug|
+      lens_name = lens[/[^\.]+/]
+      # Load all default files
+      aug.transform(
+          :lens => lens,
+          :name => lens_name,
+          :incl => instances_targets,
+          :excl => []
+      )
+      aug.load
       resources = []
-      aug.match("$target/*[label()!='#comment']").each do |spath|
+      instances_target_paths = [instances_targets].flatten.map { |t| "/files"+t }.join("|")
+      aug.match("(#{instances_target_paths})//*[label()!='#comment']").each do |spath|
         optional = aug.match("#{spath}/optional").empty?.to_s.to_sym
         type = aug.get("#{spath}/type")
         control = aug.get("#{spath}/control")
         mod = aug.get("#{spath}/module")
         arguments = aug.match("#{spath}/argument").map { |p| aug.get(p) }
-        entry = {:ensure    => :present,
-                 :optional  => optional,
-                 :type      => type,
-                 :control   => control,
-                 :module    => mod,
-                 :arguments => arguments}
-        if target == '/etc/pam.conf'
-          entry[:service] = aug.get("#{spath}/service")
+        if mod
+          target = '/'+spath.split('/')[2..-2].join('/')
+          service = nil
+          if spath.start_with? '/files/etc/pam.conf/'
+            service = aug.get("#{spath}/service")
+          else
+            service = spath.split('/')[-2]
+          end
+          entry = {:name      => "#{service}/#{mod}/#{type} in #{target}",
+                   :ensure    => :present,
+                   :optional  => optional,
+                   :control   => control,
+                   :arguments => arguments,
+          }
+          resources << new(entry)
         end
-        resources << new(entry)
       end
       resources
     end
