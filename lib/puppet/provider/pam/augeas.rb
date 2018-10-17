@@ -105,7 +105,7 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
           if spath.start_with? '/files/etc/pam.conf/'
             service = aug.get("#{spath}/service")
           else
-            service = spath.split('/')[4]
+            service = spath.split('/')[-2]
           end
           entry = {:name      => "#{service}/#{mod}/#{type} in #{target}",
                    :ensure    => :present,

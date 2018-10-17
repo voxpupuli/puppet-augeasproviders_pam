@@ -101,34 +101,34 @@ describe provider_class do
       expect(inst.size).to eq(21)
       expect(inst[0]).to eq({:ensure     => :present,
                          :service    => :absent,
-                         :type       => "auth",
+                         :type       => :absent,
                          :control    => "required",
-                         :module     => "pam_env.so",
+                         :module     => :absent,
                          :arguments  => [],})
       expect(inst[1]).to eq({:ensure     => :present,
                          :service    => :absent,
-                         :type       => "auth",
+                         :type       => :absent,
                          :control    => "sufficient",
-                         :module     => "pam_unix.so",
+                         :module     => :absent,
                          :arguments  => ["nullok","try_first_pass"],})
       expect(inst[5]).to eq({:ensure     => :present,
                          :service    => :absent,
-                         :type       => "account",
+                         :type       => :absent,
                          :control    => "required",
-                         :module     => "pam_unix.so",
+                         :module     => :absent,
                          :arguments  => ["broken_shadow"],})
       expect(inst[8]).to eq({:ensure     => :present,
                          :service    => :absent,
-                         :type       => "account",
+                         :type       => :absent,
                          :control    => "[default=bad success=ok user_unknown=ignore]",
-                         :module     => "pam_sss.so",
+                         :module     => :absent,
                          :arguments  => [],})
       expect(inst[10]).to eq({:ensure    => :present,
-                          :service    => :absent,
-                          :type      => "password",
-                          :control   => "requisite",
-                          :module    => "pam_pwquality.so",
-                          :arguments => ["try_first_pass","retry=3","type="],})
+                         :service    => :absent,
+                         :type       => :absent,
+                         :control   => "requisite",
+                         :module     => :absent,
+                         :arguments => ["try_first_pass","retry=3","type="],})
     end
 
     describe "when reodering settings" do
