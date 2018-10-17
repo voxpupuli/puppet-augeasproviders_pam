@@ -107,7 +107,7 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
                    :control   => control,
                    :module    => mod,
                    :arguments => arguments}
-          if target == '/etc/pam.conf'
+          if spath.start_with? '/files/etc/pam.conf/'
             entry[:service] = aug.get("#{spath}/service")
           end
           resources << new(entry)
