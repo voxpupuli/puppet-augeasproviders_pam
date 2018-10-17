@@ -45,7 +45,7 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
     end
   end
 
-  def self.position_path (position, type)
+  def self.position_path(position, type)
     placement, identifier, value = position.split(/ /)
     key = !!value
     if PAM_POSITION_ALIASES[key].has_key? identifier
@@ -100,16 +100,19 @@ Puppet::Type.type(:pam).provide(:augeas, :parent => Puppet::Type.type(:augeaspro
         mod = aug.get("#{spath}/module")
         arguments = aug.match("#{spath}/argument").map { |p| aug.get(p) }
         if mod
-          entry = {:name      => "Pam #{mod}/#{type}",
+          target = '/'+spath.split('/')[2..-2].join('/')
+          service = nil
+          if spath.start_with? '/files/etc/pam.conf/'
+            service = aug.get("#{spath}/service")
+          else
+            service = spath.split('/')[4]
+          end
+          entry = {:name      => "#{service}/#{mod}/#{type} in #{target}",
                    :ensure    => :present,
                    :optional  => optional,
-                   :type      => type,
                    :control   => control,
-                   :module    => mod,
-                   :arguments => arguments}
-          if spath.start_with? '/files/etc/pam.conf/'
-            entry[:service] = aug.get("#{spath}/service")
-          end
+                   :arguments => arguments,
+          }
           resources << new(entry)
         end
       end

@@ -40,22 +40,33 @@ The resource name is a descriptive string only due to the non-uniqueness of any 
   end
 
   newparam(:name) do
-      desc "The name of the resource, has no bearing on anything"
-      isnamevar
+    desc "The name of the resource, has no bearing on anything"
+    isnamevar
   end
 
   newparam(:service) do
     desc "The PAM service this entry will be placed in.  Typically this is the same as the
 filename under /etc/pam.d"
+    isnamevar
   end
 
   newparam(:type) do
     desc "The PAM service type of the setting: account, auth, password, session."
     newvalues(:account, :auth, :password, :session)
+    isnamevar
   end
 
   newparam(:module) do
     desc "The name of the specific PAM module to load."
+    isnamevar
+  end
+
+  def self.title_patterns
+    [
+        [ /(([^\/]+)\/([^\/]+)\/([^\/]+)\sin\s(.*))/, [ [:name], [:service], [:module], [:type], [:target] ] ],
+        [ /(([^\/]+)\/([^\/]+)\/([^\/]+))/, [ [:name], [:service], [:module], [:type] ] ],
+        [ /(.*)/, [ [:name] ] ],
+    ]
   end
 
   newproperty(:optional, :boolean => true) do
