@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0
+
+- Add support for Puppet 6
+
 ## 2.1.1
 
 - Upped supported Puppet versions to include Puppet 5 

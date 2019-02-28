@@ -1,51 +1,46 @@
 {
   "name": "herculesteam-augeasproviders_pam",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "author": "Dominic Cleal, Raphael Pinson",
   "summary": "Augeas-based PAM type and provider for Puppet",
   "license": "Apache-2.0",
   "source": "https://github.com/hercules-team/augeasproviders_pam",
-  "project_page": "http://augeasproviders.com",
+  "project_page": "https://github.com/hercules-team/augeasproviders_pam",
   "issues_url": "https://github.com/hercules-team/augeasproviders_pam/issues",
   "description": "This module provides type/providers for PAM using the Augeas configuration API library.",
   "dependencies": [
     {
       "name": "herculesteam/augeasproviders_core",
-      "version_requirement": ">=2.1.0 <3.0.0"
+      "version_requirement": ">=2.4.0 <3.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "5",
-        "6",
         "7",
-        "8"
+        "8",
+        "9"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "12.04",
-        "12.10",
         "14.04",
-        "14.10",
-        "15.10",
-        "16.04"
+        "16.04",
+        "18.04",
+        "18.10"
       ]
     },
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "4",
-        "5",
         "6",
         "7"
       ]
     }
   ],
   "requirements": [
-    { "name": "puppet", "version_requirement": ">= 2.7.0 < 6.0.0" }
+    { "name": "puppet", "version_requirement": ">= 5.0.0 < 6.0.0" }
   ]
 }
