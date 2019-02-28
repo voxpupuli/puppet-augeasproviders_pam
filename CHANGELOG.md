@@ -3,6 +3,8 @@
 ## 2.2.0
 
 - Add support for Puppet 6
+- Drop support for Puppet < 5
+- Update supported OSes
 
 ## 2.1.1
 
