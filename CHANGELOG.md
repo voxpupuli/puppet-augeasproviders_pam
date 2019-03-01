@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+- Fix puppet requirement to < 7.0.0
+
 ## 2.2.0
 
 - Add support for Puppet 6
