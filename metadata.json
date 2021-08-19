@@ -1,6 +1,6 @@
 {
   "name": "herculesteam-augeasproviders_pam",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "author": "Raphael Pinson",
   "summary": "Augeas-based PAM type and provider for Puppet",
   "license": "Apache-2.0",

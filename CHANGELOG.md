@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.3.0
+
+- allow augeasproviders_core 3.x
+
 ## 2.2.1
 
 - Fix puppet requirement to < 7.0.0
