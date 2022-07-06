@@ -107,7 +107,7 @@ Value is matched as follows:
     defaultto('before last')
     validate do |value|
       placement, identifier, val = value.split(%r{ })
-      raise ArgumentError, '%s is not a valid placement in position' % placement unless %w[before after].include? placement
+      raise ArgumentError, "#{placement} is not a valid placement in position" unless %w[before after].include? placement
       # Don't do validation of the second field because we are supporting xpath
       # and thats hard to validate
       #      unless ['first', 'last', 'module'].include? identifier or identifier =~ //
