@@ -16,7 +16,7 @@
 
 ## 2.1.1
 
-- Upped supported Puppet versions to include Puppet 5 
+- Upped supported Puppet versions to include Puppet 5
 
 ## 2.1.0
 
