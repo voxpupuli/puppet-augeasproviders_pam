@@ -13,7 +13,7 @@ Puppet::Type.type(:pam).provide(:augeas, parent: Puppet::Type.type(:augeasprovid
   # Boolean is the key because they either do or do not provide a
   # value for control to work against.  Module doesn't work against
   # control
-  PAM_POSITION_ALIASES = {
+  PAM_POSITION_ALIASES = { # rubocop:todo Lint/ConstantDefinitionInBlock
     true => { 'first' => "*[type='%s' and control='%s'][1]",
               'last' => "*[type='%s' and control='%s'][last()]",
               'module' => "*[type='%s' and module='%s'][1]", },

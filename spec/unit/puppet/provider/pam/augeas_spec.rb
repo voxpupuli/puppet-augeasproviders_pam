@@ -311,8 +311,8 @@ describe provider_class do
                   ))
 
       expect(txn.any_failed?).not_to eq(nil)
-      expect(@logs.first.level).to eq(:err)
-      expect(@logs.first.message.include?(target)).to eq(true)
+      expect(@logs.first.level).to eq(:err) # rubocop:todo RSpec/InstanceVariable
+      expect(@logs.first.message.include?(target)).to eq(true) # rubocop:todo RSpec/InstanceVariable
     end
   end
 end
