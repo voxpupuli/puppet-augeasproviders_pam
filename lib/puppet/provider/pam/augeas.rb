@@ -65,18 +65,18 @@ Puppet::Type.type(:pam).provide(:augeas, parent: Puppet::Type.type(:augeasprovid
   end
 
   def in_position?
-    unless resource[:position].nil?
-      path, before = self.class.position_path(resource[:position], resource[:type])
+    return if resource[:position].nil?
 
-      mpath = if before == 'before'
-                "#{resource_path}[following-sibling::#{path}]"
-              else
-                "#{resource_path}[preceding-sibling::#{path}]"
-              end
+    path, before = self.class.position_path(resource[:position], resource[:type])
 
-      augopen do |aug|
-        !aug.match(mpath).empty?
-      end
+    mpath = if before == 'before'
+              "#{resource_path}[following-sibling::#{path}]"
+            else
+              "#{resource_path}[preceding-sibling::#{path}]"
+            end
+
+    augopen do |aug|
+      !aug.match(mpath).empty?
     end
   end
 
