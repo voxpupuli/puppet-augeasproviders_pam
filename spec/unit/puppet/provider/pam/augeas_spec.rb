@@ -6,7 +6,7 @@ provider_class = Puppet::Type.type(:pam).provider(:augeas)
 
 describe provider_class do
   before :each do
-    FileTest.stubs(:exist?).returns false
+    allow(FileTest).to receive(:exist?).and_return(false)
   end
 
   context "with empty file" do
@@ -86,7 +86,7 @@ describe provider_class do
     let(:target) { tmptarget.path }
 
     it "should list instances" do
-      provider_class.stubs(:target).returns(target)
+      allow(provider_class).to receive(:target).and_return(target)
       inst = provider_class.instances.map { |p|
         {
           :ensure    => p.get(:ensure),
