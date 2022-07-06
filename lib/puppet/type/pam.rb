@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Manages settings in PAM service files
 #
 # Copyright (c) 2012 Greg Swift
@@ -23,7 +25,7 @@ The resource name is a descriptive string only due to the non-uniqueness of any 
     end
 
     def insync?(is)
-      return true if should == :positioned and is == :present and provider.in_position?
+      return true if (should == :positioned) && (is == :present) && provider.in_position?
 
       super
     end
@@ -111,7 +113,7 @@ Value is matched as follows:
       #      unless ['first', 'last', 'module'].include? identifier or identifier =~ //
       #        raise ArgumentError, "%s is not a valid identifier in position" % indentifier
       #      end
-      raise ArgumentError, 'Value must be set if you are matching on module' if val.nil? and identifier == 'module'
+      raise ArgumentError, 'Value must be set if you are matching on module' if val.nil? && (identifier == 'module')
     end
   end
 

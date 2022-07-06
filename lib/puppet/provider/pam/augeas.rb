@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Alternative Augeas-based providers for Puppet
 #
 # Copyright (c) 2012 Greg Swift
@@ -17,14 +19,14 @@ Puppet::Type.type(:pam).provide(:augeas, parent: Puppet::Type.type(:augeasprovid
               'module' => "*[type='%s' and module='%s'][1]", },
     false => { 'first' => "*[type='%s'][1]",
                'last' => "*[type='%s'][last()]", },
-  }
+  }.freeze
 
   confine feature: :augeas
 
   default_file { '/etc/pam.d/system-auth' }
 
   def self.target(resource = nil)
-    if resource and resource[:service] and !(resource[:target])
+    if resource && resource[:service] && !(resource[:target])
       "/etc/pam.d/#{resource[:service]}".chomp('/')
     else
       super
@@ -49,8 +51,8 @@ Puppet::Type.type(:pam).provide(:augeas, parent: Puppet::Type.type(:augeasprovid
 
   def self.position_path(position, type)
     placement, identifier, value = position.split(%r{ })
-    key = !!value
-    if PAM_POSITION_ALIASES[key].has_key? identifier
+    key = !value.nil?
+    if PAM_POSITION_ALIASES[key].key? identifier
       expr = PAM_POSITION_ALIASES[key][identifier]
       expr = key ? format(expr, type, value) : format(expr, type)
     else
