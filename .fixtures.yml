@@ -1,6 +1,4 @@
 fixtures:
   repositories:
     "augeasproviders_core":
-      repo: "git://github.com/hercules-team/augeasproviders_core.git"
-  symlinks:
-    augeasproviders_pam: "#{source_dir}"
+      repo: "https://github.com/voxpupuli/puppet-augeasproviders_core"

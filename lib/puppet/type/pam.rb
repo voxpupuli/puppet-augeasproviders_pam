@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Manages settings in PAM service files
 #
 # Copyright (c) 2012 Greg Swift
@@ -13,7 +15,7 @@ The resource name is a descriptive string only due to the non-uniqueness of any 
     block if block_given?
 
     newvalue(:positioned) do
-      current = self.retrieve
+      current = retrieve
       if current == :absent
         provider.create
       elsif !provider.in_position?
@@ -23,25 +25,26 @@ The resource name is a descriptive string only due to the non-uniqueness of any 
     end
 
     def insync?(is)
-      return true if should == :positioned and is == :present and provider.in_position?
+      return true if (should == :positioned) && (is == :present) && provider.in_position?
+
       super
     end
   end
 
   def munge_boolean(value)
     case value
-    when true, "true", :true
+    when true, 'true', :true
       :true
-    when false, "false", :false
+    when false, 'false', :false
       :false
     else
-      fail("munge_boolean only takes booleans")
+      raise('munge_boolean only takes booleans')
     end
   end
 
   newparam(:name) do
-      desc "The name of the resource, has no bearing on anything"
-      isnamevar
+    desc 'The name of the resource, has no bearing on anything'
+    isnamevar
   end
 
   newparam(:service) do
@@ -50,16 +53,16 @@ filename under /etc/pam.d"
   end
 
   newparam(:type) do
-    desc "The PAM service type of the setting: account, auth, password, session."
+    desc 'The PAM service type of the setting: account, auth, password, session.'
     newvalues(:account, :auth, :password, :session)
   end
 
   newparam(:module) do
-    desc "The name of the specific PAM module to load."
+    desc 'The name of the specific PAM module to load.'
   end
 
-  newproperty(:optional, :boolean => true) do
-    desc "Whether failure to load the module will break things"
+  newproperty(:optional, boolean: true) do
+    desc 'Whether failure to load the module will break things'
 
     newvalue(:true)
     newvalue(:false)
@@ -69,8 +72,8 @@ filename under /etc/pam.d"
     end
   end
 
-  newproperty(:arguments, :array_matching => :all) do
-    desc "Arguments to assign for the module."
+  newproperty(:arguments, array_matching: :all) do
+    desc 'Arguments to assign for the module.'
     defaultto { [] }
   end
 
@@ -78,8 +81,8 @@ filename under /etc/pam.d"
     desc "Simple or complex definition of the module's behavior on failure."
   end
 
-  newparam(:control_is_param, :boolean => true) do
-    desc "Whether `control` should be considered a parameter or a property."
+  newparam(:control_is_param, boolean: true) do
+    desc 'Whether `control` should be considered a parameter or a property.'
 
     newvalues :false, :true
     defaultto :false
@@ -103,23 +106,18 @@ Value is matched as follows:
 "
     defaultto('before last')
     validate do |value|
-      placement, identifier, val = value.split(/ /)
-      unless ['before', 'after'].include? placement
-        raise ArgumentError, "%s is not a valid placement in position" % placement
-      end
-# Don't do validation of the second field because we are supporting xpath
-# and thats hard to validate
-#      unless ['first', 'last', 'module'].include? identifier or identifier =~ //
-#        raise ArgumentError, "%s is not a valid identifier in position" % indentifier
-#      end
-      if val.nil? and identifier == 'module'
-        raise ArgumentError, "Value must be set if you are matching on module"
-      end
+      placement, identifier, val = value.split(%r{ })
+      raise ArgumentError, "#{placement} is not a valid placement in position" unless %w[before after].include? placement
+      # Don't do validation of the second field because we are supporting xpath
+      # and thats hard to validate
+      #      unless ['first', 'last', 'module'].include? identifier or identifier =~ //
+      #        raise ArgumentError, "%s is not a valid identifier in position" % indentifier
+      #      end
+      raise ArgumentError, 'Value must be set if you are matching on module' if val.nil? && (identifier == 'module')
     end
   end
 
   newparam(:target) do
-    desc "The file in which to store the settings, defaults to `/etc/pam.d/{service}`."
+    desc 'The file in which to store the settings, defaults to `/etc/pam.d/{service}`.'
   end
-
 end
