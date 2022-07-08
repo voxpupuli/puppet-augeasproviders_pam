@@ -1,6 +1,6 @@
 {
   "name": "puppet-augeasproviders_pam",
-  "version": "3.0.0",
+  "version": "3.0.1-rc0",
   "author": "Vox Pupuli",
   "summary": "Augeas-based PAM type and provider for Puppet",
   "license": "Apache-2.0",
@@ -39,6 +39,9 @@
     }
   ],
   "requirements": [
-    { "name": "puppet", "version_requirement": ">= 6.1.0 < 8.0.0" }
+    {
+      "name": "puppet",
+      "version_requirement": ">= 6.1.0 < 8.0.0"
+    }
   ]
 }
