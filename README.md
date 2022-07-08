@@ -1,11 +1,12 @@
-[![Puppet Forge Version](http://img.shields.io/puppetforge/v/herculesteam/augeasproviders_pam.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_pam)
-[![Puppet Forge Downloads](http://img.shields.io/puppetforge/dt/herculesteam/augeasproviders_pam.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_pam)
-[![Puppet Forge Endorsement](https://img.shields.io/puppetforge/e/herculesteam/augeasproviders_pam.svg)](https://forge.puppetlabs.com/herculesteam/augeasproviders_pam)
-[![Build Status](https://img.shields.io/travis/hercules-team/augeasproviders_pam/master.svg)](https://travis-ci.org/hercules-team/augeasproviders_pam)
-[![Coverage Status](https://img.shields.io/coveralls/hercules-team/augeasproviders_pam.svg)](https://coveralls.io/r/hercules-team/augeasproviders_pam)
-[![Gemnasium](https://img.shields.io/gemnasium/hercules-team/augeasproviders_pam.svg)](https://gemnasium.com/hercules-team/augeasproviders_pam)
-[![Sponsor](https://img.shields.io/badge/%E2%99%A5-Sponsor-hotpink.svg)](https://github.com/sponsors/raphink)
-
+[![Build Status](https://github.com/voxpupuli/puppet-augeasproviders_pam/workflows/CI/badge.svg)](https://github.com/voxpupuli/puppet-augeasproviders_pam/actions?query=workflow%3ACI)
+[![Release](https://github.com/voxpupuli/puppet-augeasproviders_pam/actions/workflows/release.yml/badge.svg)](https://github.com/voxpupuli/puppet-augeasproviders_pam/actions/workflows/release.yml)
+[![Puppet Forge](https://img.shields.io/puppetforge/v/puppet/augeasproviders_pam.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_pam)
+[![Puppet Forge - downloads](https://img.shields.io/puppetforge/dt/puppet/augeasproviders_pam.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_pam)
+[![Puppet Forge - endorsement](https://img.shields.io/puppetforge/e/puppet/augeasproviders_pam.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_pam)
+[![Puppet Forge - scores](https://img.shields.io/puppetforge/f/puppet/augeasproviders_pam.svg)](https://forge.puppetlabs.com/puppet/augeasproviders_pam)
+[![puppetmodule.info docs](http://www.puppetmodule.info/images/badge.png)](http://www.puppetmodule.info/m/puppet-augeasproviders_pam)
+[![Coverage Status](https://img.shields.io/coveralls/voxpupuli/puppet-augeasproviders_pam.svg)](https://coveralls.io/r/voxpupuli/puppet-augeasproviders_pam)
+[![Apache-2 License](https://img.shields.io/github/license/voxpupuli/puppet-augeasproviders_pam.svg)](LICENSE)
 
 # pam: type/provider for PAM files for Puppet
 

@@ -1,7 +1,7 @@
 {
-  "name": "herculesteam-augeasproviders_pam",
-  "version": "2.3.0",
-  "author": "Raphael Pinson",
+  "name": "puppet-augeasproviders_pam",
+  "version": "3.0.0",
+  "author": "Vox Pupuli",
   "summary": "Augeas-based PAM type and provider for Puppet",
   "license": "Apache-2.0",
   "source": "https://github.com/voxpupuli/puppet-augeasproviders_pam",
