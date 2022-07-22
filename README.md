@@ -31,7 +31,7 @@ See [Puppet/Augeas pre-requisites](http://docs.puppetlabs.com/guides/augeas.html
 
 On Puppet 2.7.14+, the module can be installed easily ([documentation](http://docs.puppetlabs.com/puppet/latest/reference/modules_installing.html)):
 
-    puppet module install herculesteam/augeasproviders_pam
+    puppet module install puppet/augeasproviders_pam
 
 You may see an error similar to this on Puppet 2.x ([#13858](http://projects.puppetlabs.com/issues/13858)):
 
@@ -59,7 +59,7 @@ pam                       | **yes** | **yes** | **yes** | **yes** |
 ## Documentation and examples
 
 Type documentation can be generated with `puppet doc -r type` or viewed on the
-[Puppet Forge page](http://forge.puppetlabs.com/herculesteam/augeasproviders_pam).
+[Puppet Forge page](https://forge.puppet.com/modules/puppet/augeasproviders_pam).
 
 
 ### manage simple entry
