@@ -10,7 +10,7 @@
   "description": "This module provides type/providers for PAM using the Augeas configuration API library.",
   "dependencies": [
     {
-      "name": "herculesteam/augeasproviders_core",
+      "name": "puppet/augeasproviders_core",
       "version_requirement": ">= 2.4.0 < 4.0.0"
     }
   ],
