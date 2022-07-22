@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v3.0.1](https://github.com/voxpupuli/puppet-augeasproviders_pam/tree/v3.0.1) (2022-07-22)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_pam/compare/v3.0.0...v3.0.1)
+
+**Fixed bugs:**
+
+- update references to voxpupuli namespace [\#36](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/36) ([vchepkov](https://github.com/vchepkov))
+
 ## [v3.0.0](https://github.com/voxpupuli/puppet-augeasproviders_pam/tree/v3.0.0) (2022-07-08)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_pam/compare/2.3.0...v3.0.0)
