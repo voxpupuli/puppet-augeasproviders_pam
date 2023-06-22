@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v4.0.0](https://github.com/voxpupuli/puppet-augeasproviders_pam/tree/v4.0.0) (2023-06-22)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_pam/compare/v3.0.1...v4.0.0)
+
+**Breaking changes:**
+
+- Drop Puppet 6 support [\#43](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/43) ([bastelfreak](https://github.com/bastelfreak))
+
+**Implemented enhancements:**
+
+- puppet/augeasproviders\_core: Allow 4.x [\#45](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/45) ([bastelfreak](https://github.com/bastelfreak))
+- Add puppet 8 support [\#44](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/44) ([bastelfreak](https://github.com/bastelfreak))
+
 ## [v3.0.1](https://github.com/voxpupuli/puppet-augeasproviders_pam/tree/v3.0.1) (2022-07-22)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_pam/compare/v3.0.0...v3.0.1)

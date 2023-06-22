@@ -1,6 +1,6 @@
 {
   "name": "puppet-augeasproviders_pam",
-  "version": "3.0.2-rc0",
+  "version": "4.0.0",
   "author": "Vox Pupuli",
   "summary": "Augeas-based PAM type and provider for Puppet",
   "license": "Apache-2.0",
