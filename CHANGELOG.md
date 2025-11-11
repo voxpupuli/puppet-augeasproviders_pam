@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 Each new release typically also includes the latest modulesync defaults.
 These should not affect the functionality of the module.
 
+## [v5.0.0](https://github.com/voxpupuli/puppet-augeasproviders_pam/tree/v5.0.0) (2025-11-11)
+
+[Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_pam/compare/v4.0.0...v5.0.0)
+
+**Breaking changes:**
+
+- Drop puppet, update openvox minimum version to 8.19 [\#64](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/64) ([TheMeier](https://github.com/TheMeier))
+
+**Implemented enhancements:**
+
+- Add Ubuntu 24.04 [\#68](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/68) ([bwitt](https://github.com/bwitt))
+- Add support for Debian 12 [\#66](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/66) ([smortex](https://github.com/smortex))
+- metadata.json: Add OpenVox [\#61](https://github.com/voxpupuli/puppet-augeasproviders_pam/pull/61) ([jstraw](https://github.com/jstraw))
+
 ## [v4.0.0](https://github.com/voxpupuli/puppet-augeasproviders_pam/tree/v4.0.0) (2023-06-22)
 
 [Full Changelog](https://github.com/voxpupuli/puppet-augeasproviders_pam/compare/v3.0.1...v4.0.0)
